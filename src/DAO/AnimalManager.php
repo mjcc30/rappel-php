@@ -76,7 +76,7 @@ class AnimalManager extends DAO
             ->setName($animal->name)
             ->setTypes($types)
             ->setImage($animal->image)
-            ->setIsAdopted($pokemon->is_adopted)
+            ->setIsAdopted($animal->is_adopted)
         ;
     }
 }

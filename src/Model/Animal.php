@@ -87,9 +87,9 @@ class Animal
     /**
      * @param string|null $image
      *
-     * @return Pokemon
+     * @return Animal
      */
-    public function setImage(?string $image): Pokemon
+    public function setImage(?string $image): Animal
     {
         $this->image = $image;
 
@@ -107,9 +107,9 @@ class Animal
     /**
      * @param bool $isAdopted
      *
-     * @return Pokemon
+     * @return Animal
      */
-    public function setisAdopted(bool $isAdopted): Pokemon
+    public function setisAdopted(bool $isAdopted): Animal
     {
         $this->isAdopted = $isAdopted;
 

@@ -1,0 +1,10 @@
+<div class="card">
+    <img src="https://placedog.net/640/480?random" class="card-img-top" alt="">
+    <div class="card-body">
+        <h5 class="card-title">{{ animal.name }}</h5>
+        <p class="card-text">
+            <b>Genre</b> : {{ animal.types|join(', ') }}<br>
+            {{ animal.isCaptured ? 'animal adopté' : 'Pas encore adopté' }}<br><br>
+        </p>
+    </div>
+</div>

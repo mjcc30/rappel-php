@@ -7,17 +7,7 @@
     <hr>
     <div class="row">
         {% for animal in animals %}
-            <div class="col-3 mb-4">
-                <div class="card">
-                    <img src="https://www.pokepedia.fr/images/e/ef/Bulbizarre-RFVF.png" class="card-img-top" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ animal.name }}</h5>
-                        <p class="card-text">
-                            <b>Genre</b> : {{ animal.types|join(', ') }}<br>
-                        </p>
-                    </div>
-                </div>
-            </div>
+            {% include 'Card/animal-card.html.twig' with {'animal': animal} %}
         {% endfor %}
     </div>
 {% endblock %}
