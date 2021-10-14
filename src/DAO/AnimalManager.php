@@ -45,6 +45,17 @@ class AnimalManager extends DAO
         return 1 <= $result->rowCount();
     }
 
+    public function findOneBy(string $attribute, $value): ?Animal
+    {
+        $result = $this->createQuery("SELECT * FROM animal WHERE {$attribute} = ?", [$value]);
+
+        if (false === $object = $result->fetchObject()) {
+            return null;
+        }
+
+        return $this->buildObject($object);
+    }
+
     //** PRIVATE FUNCTIONS */
 
 
