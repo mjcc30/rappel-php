@@ -47,4 +47,25 @@ class AnimalManager extends DAO
 
         return true;
     }
+
+    public function findLast(): array
+    {
+        $result = $this->createQuery('SELECT * FROM animal ORDER BY Id DESC LIMIT 10');
+
+        $animals = [];
+        foreach ($result->fetchAll() as $animal) {
+            try {
+                $types = json_decode($animal->types, true, 512, JSON_THROW_ON_ERROR);
+            } catch (\JsonException $e) {
+                $types = [];
+            }
+
+            $animals[] = (new Animal())
+                ->setName($animal->name)
+                ->setTypes($types)
+            ;
+        }
+
+        return $animals;
+    }
 }
