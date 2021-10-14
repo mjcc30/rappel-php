@@ -12,40 +12,10 @@ class AnimalManager extends DAO
 
         $animals = [];
         foreach ($result->fetchAll() as $animal) {
-            try {
-                $types = json_decode($animal->types, true, 512, JSON_THROW_ON_ERROR);
-            } catch (\JsonException $e) {
-                $types = [];
-            }
-
-            $animals[] = (new Animal())
-                ->setName($animal->name)
-                ->setTypes($types)
-            ;
+            $animals[] = $this->buildObject($animal);
         }
 
         return $animals;
-    }
-
-    public function create(animal $animal): bool
-    {
-        $sql = 'INSERT INTO animal (name, types) VALUES (?, ?)';
-
-        try {
-            $types = json_encode($animal->getTypes(), JSON_THROW_ON_ERROR);
-        } catch (\JsonException $e) {
-            $types = '';
-        }
-
-        $this->createQuery(
-            $sql,
-            [
-                $animal->getName(),
-                $types,
-            ]
-        );
-
-        return true;
     }
 
     public function findLast(): array
@@ -54,18 +24,59 @@ class AnimalManager extends DAO
 
         $animals = [];
         foreach ($result->fetchAll() as $animal) {
-            try {
-                $types = json_decode($animal->types, true, 512, JSON_THROW_ON_ERROR);
-            } catch (\JsonException $e) {
-                $types = [];
-            }
-
-            $animals[] = (new Animal())
-                ->setName($animal->name)
-                ->setTypes($types)
-            ;
+            $animals[] = $this->buildObject($animal);
         }
 
         return $animals;
+    }
+
+    public function create(Animal $animal): int
+    {
+        return $this->createQuery(
+            'INSERT INTO animal (name, types, image, is_adopted) VALUES (?, ?, ?, ?)',
+            $this->buildValues($animal)
+        );
+    }
+
+    //** PRIVATE FUNCTIONS */
+
+
+    private function buildValues(Animal $animal): array
+    {
+        try {
+            $types = json_encode($animal->getTypes(), JSON_THROW_ON_ERROR);
+        } catch (\JsonException $e) {
+            $types = '';
+        }
+
+        return [
+            $animal->getName(),
+            $types,
+            $animal->getImage(),
+            $animal->isAdopted() ? 1 : 0,
+        ];
+    }
+
+    private function buildObject(object $animal): Animal
+    {
+        try {
+            $types = json_decode($animal->types, true, 512, JSON_THROW_ON_ERROR);
+        } catch (\JsonException $e) {
+            $types = [];
+        }
+
+        try {
+            $seenAt = new \DateTimeImmutable($animal->seen_at);
+        } catch (\Exception $e) {
+            $seenAt = new \DateTimeImmutable();
+        }
+
+        return (new Animal())
+            ->setId($animal->id)
+            ->setName($animal->name)
+            ->setTypes($types)
+            ->setImage($animal->image)
+            ->setIsAdopted($pokemon->is_adopted)
+        ;
     }
 }

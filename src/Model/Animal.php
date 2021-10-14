@@ -7,9 +7,13 @@ class Animal
     private int $id;
     private string $name;
     private array $types;
+    private bool $isAdopted;
+    private ?string $image;
 
     public function __construct()
     {
+        $this->isAdopted = false;
+        $this->image = null;
     }
 
     /**
@@ -68,6 +72,46 @@ class Animal
     public function setTypes(array $types): Animal
     {
         $this->types = $types;
+
+        return $this;
+    }
+
+      /**
+     * @return string|null
+     */
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string|null $image
+     *
+     * @return Pokemon
+     */
+    public function setImage(?string $image): Pokemon
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdopted(): bool
+    {
+        return $this->isAdopted;
+    }
+
+    /**
+     * @param bool $isAdopted
+     *
+     * @return Pokemon
+     */
+    public function setisAdopted(bool $isAdopted): Pokemon
+    {
+        $this->isAdopted = $isAdopted;
 
         return $this;
     }
