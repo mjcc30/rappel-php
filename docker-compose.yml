@@ -1,4 +1,4 @@
-version: '3.6'
+version: "3.6"
 services:
   lamp-db:
     container_name: lamp-db
@@ -10,7 +10,7 @@ services:
       - 3306:3306
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: lamp
+      MYSQL_DATABASE: animal
       MYSQL_USER: lamp
       MYSQL_PASSWORD: lamp
     networks:
@@ -44,7 +44,7 @@ services:
       PMA_HOST: lamp-db
       MYSQL_ROOT_PASSWORD: root
     ports:
-      - 8001:80 
+      - 8001:80
     networks:
       - lamp
       - web
