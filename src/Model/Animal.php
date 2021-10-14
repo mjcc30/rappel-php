@@ -53,26 +53,6 @@ class Animal
     }
 
     /**
-     * @return string
-     */
-    public function getNumber(): string
-    {
-        return $this->number;
-    }
-
-    /**
-     * @param string $number
-     *
-     * @return Animal
-     */
-    public function setNumber(string $number): Animal
-    {
-        $this->number = $number;
-
-        return $this;
-    }
-
-    /**
      * @return array
      */
     public function getTypes(): array
