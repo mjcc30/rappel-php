@@ -1,0 +1,57 @@
+version: '3.6'
+services:
+  lamp-db:
+    container_name: lamp-db
+    image: mariadb:latest
+    restart: unless-stopped
+    volumes:
+      - ./db:/var/lib/mysql/
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: lamp
+      MYSQL_USER: lamp
+      MYSQL_PASSWORD: lamp
+    networks:
+      - lamp
+
+  lamp-apache_php:
+    container_name: lamp-apache_php
+    build:
+      context: .
+    restart: unless-stopped
+    depends_on:
+      - lamp-db
+    volumes:
+      - ./data:/var/www/html
+      - ./php:/usr/local/etc/php
+      - ./apache2-conf:/etc/apache2
+      - ./apache2-logs:/var/log/apache2
+    ports:
+      - 8000:80
+    networks:
+      - lamp
+      - web
+
+  lamp-myadmin:
+    container_name: lamp-myadmin
+    image: phpmyadmin
+    restart: unless-stopped
+    depends_on:
+      - lamp-db
+    environment:
+      PMA_HOST: lamp-db
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 8001:80 
+    networks:
+      - lamp
+      - web
+
+networks:
+  lamp:
+    name: lamp
+  web:
+    external:
+      name: web

@@ -1,0 +1,21 @@
+{
+  "name": "maxime/rappel-php",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "Maxime\\RappelPhp\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "cordeiro",
+      "email": "mjcc@tutanota.com"
+    }
+  ],
+  "require": {
+    "twig/twig": "^2.0"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-latest"
+  }
+}
