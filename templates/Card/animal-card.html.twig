@@ -4,7 +4,7 @@
         <h5 class="card-title">{{ animal.name }}</h5>
         <p class="card-text">
             <b>Genre</b> : {{ animal.types|join(', ') }}<br>
-            {{ animal.isCaptured ? 'animal adopté' : 'Pas encore adopté' }}<br><br>
+            {{ animal.isAdopted ? 'animal adopté' : 'Pas encore adopté' }}<br><br>
         </p>
     </div>
 </div>
