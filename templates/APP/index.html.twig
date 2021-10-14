@@ -1,7 +1,21 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Index - {{ parent() }}{% endblock %}
+{% block title %}Liste des animaux - {{ parent() }}{% endblock %}
 
 {% block body %}
-    <p>Je suis un text du fichier index.html</p>
+    <h1>Liste des dernier animaux</h1>
+    <hr>
+    <div class="row">
+        {% for animal in animals %}
+            <div class="col-3 mb-4">
+                <div class="card">
+                    <img src="https://www.pokepedia.fr/images/e/ef/Bulbizarre-RFVF.png" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ animal.name }}</h5>
+                        <p class="card-text">
+                            <b>Genre</b> : {{ animal.types|join(', ') }}<br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
