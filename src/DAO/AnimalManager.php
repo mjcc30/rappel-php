@@ -38,6 +38,13 @@ class AnimalManager extends DAO
         );
     }
 
+    public function delete(Animal $animal): bool
+    {
+        $result = $this->createQuery('DELETE FROM animal WHERE id = ?', [$animal->getId()]);
+
+        return 1 <= $result->rowCount();
+    }
+
     //** PRIVATE FUNCTIONS */
 
 
